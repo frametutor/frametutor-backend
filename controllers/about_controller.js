@@ -23,6 +23,23 @@ const updateAbout = async (req, res) => {
   }
 };
 
+const crateAbout = async (req, res) => {
+  try {
+    const { para1, para2 } = req.body;
+
+    const about = new About({
+      para1,
+      para2,
+      
+    });
+    const savedAbout = await about.save();
+
+    res.status(201).json({message: 'created about successfuly', savedAbout});
+  } catch (error) {
+    res.status(500).json({ message: 'Error creating about entry', error });
+  }
+};
+
 
 const getAbout = async (req, res) => {
     try {
@@ -46,6 +63,7 @@ const getAbout = async (req, res) => {
   };
 
 module.exports = {
+  crateAbout,
     updateAbout,
     getAbout
 };
